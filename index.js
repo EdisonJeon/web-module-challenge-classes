@@ -154,6 +154,15 @@ class Instructor extends Lambdasian {
   grade(obj, str) {
     return `${obj.name} receives a perfect score on ${str}`;
   }
+  adjustGrade(obj) {
+    let random = Math.round(Math.random());
+    let randomScore = Math.floor(Math.random() * 20);
+    if (random === 0) {
+      obj.grade += randomScore;
+    } else {
+      obj.grade -= randomScore;
+    }
+  }
 }
 
 const student1 = new Lambdasian({
@@ -195,6 +204,7 @@ class Student extends Lambdasian {
     this.previousBackground = attr.previousBackground;
     this.className = attr.className;
     this.favSubjects = attr.favSubjects;
+    this.grade = Math.floor(Math.random() * 100 + 1);
   }
   listSubjects() {
     return `Loving ${this.favSubjects.map((value) => {
@@ -207,6 +217,13 @@ class Student extends Lambdasian {
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
   }
+  graduate() {
+    if (this.grade >= 70) {
+      return `Your grade is ${this.grade}, congrats on graduating!`;
+    } else {
+      return `Your grade is ${this.grade}, sorry, let's keep on working.`;
+    }
+  }
 }
 
 const newStudent = new Student({
@@ -214,6 +231,7 @@ const newStudent = new Student({
 });
 
 console.log(newStudent.listSubjects());
+console.log(newStudent.grade);
 
 /*
   TASK 6
@@ -251,6 +269,16 @@ class ProjectManager extends Instructor {
       + This method, when called, will check the grade of the student and see if they're ready to graduate from BloomTech
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
+const realStudent = new Student({
+  name: "Ryan"
+})
+
+console.log("before", realStudent.grade);
+instructor1.adjustGrade(realStudent)
+console.log("after", realStudent.grade);
+console.log(realStudent.graduate())
+
 
 //End of Challenge
 /* 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑🛑🛑🛑🛑🛑 */
